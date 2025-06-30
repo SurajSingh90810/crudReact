@@ -1,11 +1,13 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { getStorageData, setStorageData } from "../Service/localStorage";
-
+import generateUniqueId from "generate-unique-id";
+import { Link, useNavigate } from "react-router-dom";
+import "./AddEmp.css";
 
 const AddEmployee = () => {
-
+  const navigate = useNavigate();
   const intialState = {
+    id: "",
     fname: "",
     email: "",
     gender: "",
@@ -15,125 +17,133 @@ const AddEmployee = () => {
   };
 
   const [inputForm, setInputForm] = useState(intialState);
-  const [employees,setEmployees]=useState(getStorageData())
+  const [employees] = useState(getStorageData());
 
   const handleChanged = (e) => {
     const { name, value } = e.target;
     setInputForm({
       ...inputForm,
-      [name]: value
+      [name]: value,
     });
-   
   };
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-     const getData=getStorageData()
-     const allData=[...getData,inputForm]
-     setStorageData(allData)
-     setEmployees(allData)
+    const uniqueId = generateUniqueId({ length: 6, useLetters: false });
+    inputForm.id = uniqueId;
+    const getData = getStorageData();
+    const allData = [...getData, inputForm];
+    setStorageData(allData);
     setInputForm(intialState);
-    
+    navigate("/");
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-      <h1>Add Employee</h1>
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-        <label>
-          Full Name:
+    <div className="add-employee-container">
+      <h1 className="add-employee-title">Add Employee</h1>
+      <form onSubmit={handleSubmit} className="employee-form">
+        <div className="form-group">
+          <label>Full Name:</label>
           <input
             type="text"
             name="fname"
             value={inputForm.fname}
             onChange={handleChanged}
             placeholder="Enter Your Full Name"
+            className="form-control"
+            required
           />
-        </label>
+        </div>
 
-        <label>
-          Email:
+        <div className="form-group">
+          <label>Email:</label>
           <input
             type="email"
             name="email"
             value={inputForm.email}
             onChange={handleChanged}
             placeholder="Enter Your Email"
+            className="form-control"
+            required
           />
-        </label>
+        </div>
 
-        <label>
-          Password:
+        <div className="form-group">
+          <label>Password:</label>
           <input
             type="password"
             name="password"
             value={inputForm.password}
             onChange={handleChanged}
             placeholder="Enter Your Password"
+            className="form-control"
+            required
           />
-        </label>
+        </div>
 
-        <label>
-          Gender:
-          <div>
-            <label>
+        <div className="form-group">
+          <label>Gender:</label>
+          <div className="radio-group">
+            <label className="radio-option">
               <input
                 type="radio"
-                name="gender" 
+                name="gender"
                 value="Male"
-              
                 onChange={handleChanged}
+                required
               />
               Male
             </label>
-            <label style={{ marginLeft: "10px" }}>
+            <label className="radio-option">
               <input
                 type="radio"
                 name="gender"
                 value="Female"
-                
                 onChange={handleChanged}
               />
               Female
             </label>
           </div>
-        </label>
+        </div>
 
-        <label>
-          Mobile No:
+        <div className="form-group">
+          <label>Mobile No:</label>
           <input
             type="text"
             name="mobileNo"
             value={inputForm.mobileNo}
             onChange={handleChanged}
             placeholder="Enter Your Mobile No"
+            className="form-control"
+            required
           />
-        </label>
+        </div>
 
-        <label>
-          Role:
-          <select name="role" value={inputForm.role} onChange={handleChanged}>
+        <div className="form-group">
+          <label>Role:</label>
+          <select
+            name="role"
+            value={inputForm.role}
+            onChange={handleChanged}
+            className="form-control"
+            required
+          >
             <option value="">Select Role</option>
             <option value="Admin">Admin</option>
             <option value="HR Manager">HR Manager</option>
             <option value="Sales manager">Sales manager</option>
             <option value="Employee">Employee</option>
           </select>
-        </label>
+        </div>
 
-        <button type="submit">Add Employee</button>
+        <button type="submit" className="submit-btn">
+          Add Employee
+        </button>
       </form>
 
-
-
-<div>
-     {
-        employees.map((emp,index)=>(
-        
-            <div key={index}>{emp.fname} {emp.email}</div>
-            
-        ))
-     }</div>
+      <Link to={"/"} className="home-link">
+        ← Back to Home
+      </Link>
     </div>
   );
 };

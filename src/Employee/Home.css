@@ -1,0 +1,87 @@
+/* Home.css */
+
+/* Main container styling */
+.home-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header styling */
+.home-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+/* Table styling */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table thead tr {
+  background-color: #3498db;
+  color: white;
+  text-align: left;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px 15px;
+}
+
+.employee-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.employee-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.employee-table tbody tr:last-of-type {
+  border-bottom: 2px solid #3498db;
+}
+
+.employee-table tbody tr:hover {
+  background-color: #e8f4fc;
+  cursor: pointer;
+}
+
+/* Button styling */
+.action-button {
+  padding: 8px 12px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  background-color: #f39c12;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #e67e22;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+/* No data message styling */
+.no-data-message {
+  text-align: center;
+  margin-top: 50px;
+  color: #7f8c8d;
+  font-size: 24px;
+}
