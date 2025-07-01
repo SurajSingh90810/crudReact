@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { getStorageData, setStorageData } from "../Service/localStorage";
 import generateUniqueId from "generate-unique-id";
@@ -17,7 +18,7 @@ const AddEmployee = () => {
   };
 
   const [inputForm, setInputForm] = useState(intialState);
-  const [employees] = useState(getStorageData());
+  const [employees,setEmployee] = useState(getStorageData());
 
   const handleChanged = (e) => {
     const { name, value } = e.target;
